@@ -1,5 +1,5 @@
 #include <stdint.h> 
-#include "r_instructions.h"
+#include "cpu.h"
 
 //These are the R-instructions implemented by the simulted MIPS processor
 //You will need to define the following macros that use masking and
