@@ -81,7 +81,7 @@ void mult(uint32_t instruction){
 void multu(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
-	uint64_t res = (uint64_t) registers[rs] * (uint64_t) registers[rt]; 
+	uint64_t result = (uint64_t) registers[rs] * (uint64_t) registers[rt]; 
 	LO = (uint32_t) result;
 	HI = (uint32_t) logicalShiftRight(result, 32);
 } 
@@ -136,6 +136,7 @@ void sll(uint32_t instruction){
 } 
 
 void sllv(uint32_t instruction){
+	uint8_t rs = RT_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
 	uint8_t shamt = SHAMT_FIELD(instruction);
