@@ -34,6 +34,12 @@ uint8_t RD_FIELD(uint32_t instruction){
 	return (uint8_t) instruction;
 }
 
+uint8_t SHAMT_FIELD(uint32_t instruction){
+	instruction = instruction << 21;
+	instruction = logicalShiftRight(instruction, 27);
+	return (uint8_t) instruction;
+}
+
 //Here's the simulated mips add instruction.
 
 void add(uint32_t instruction){
@@ -44,34 +50,104 @@ void add(uint32_t instruction){
 }
 
 void addu(uint32_t instruction){
-
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = (uint32_t) ((uint32_t) registers[rs] + (uint32_t) registers[rt]);
 } 
 
-void sub(uint32_t instruction){} 
+void sub(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = (uint32_t) ((int32_t) registers[rs] - (int32_t) registers[rt]);
+} 
 
-void subu(uint32_t instruction){} 
+void subu(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = (uint32_t) ((uint32_t) registers[rs] - (uint32_t) registers[rt]);
+} 
 
-void mult(uint32_t instruction){} 
+void mult(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	int64_t result = (int64_t)((int32_t) registers[rs]) * (int64_t)((int32_t) registers[rt]);
+	LO = (uint32_t) result;
+	HI = (uint32_t) logicalShiftRight(result, 32);
+} 
 
-void multu(uint32_t instruction){} 
+void multu(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint64_t res = (uint64_t) registers[rs] * (uint64_t) registers[rt]; 
+	LO = (uint32_t) result;
+	HI = (uint32_t) logicalShiftRight(result, 32);
+} 
 
-void div(uint32_t instruction){} 
+void div(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	LO = (int32_t) registers[rs] / (int32_t) registers[rt];
+	HI = (int32_t) registers[rs] % (int32_t) registers[rt];
+} 
 
-void divu(uint32_t instruction){} 
+void divu(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	LO = (uint32_t) registers[rs] / (uint32_t) registers[rt];
+	HI = (uint32_t) registers[rs] % (uint32_t) registers[rt];
+} 
 
-void and(uint32_t instruction){} 
+void and(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = (uint32_t) registers[rs] & (uint32_t) registers[rt];
+} 
 
-void nor(uint32_t instruction){} 
+void nor(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = ~((uint32_t) registers[rs] | (uint32_t) registers[rt]);
+} 
 
-void or(uint32_t instruction){} 
+void or(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = (uint32_t) registers[rs] | (uint32_t) registers[rt];
+} 
 
-void xor(uint32_t instruction){} 
+void xor(uint32_t instruction){
+	uint8_t rs = RS_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = (uint32_t) registers[rs] ^ (uint32_t) registers[rt];
+} 
 
-void sll(uint32_t instruction){} 
+void sll(uint32_t instruction){
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	uint8_t shamt = SHAMT_FIELD(instruction);
+	registers[rd] = (uint32_t) registers[rt] << shamt;
+} 
 
-void sllv(uint32_t instruction){} 
+void sllv(uint32_t instruction){
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	uint8_t shamt = SHAMT_FIELD(instruction);
+	registers[rd] = (uint32_t) registers[rs] << (uint32_t) registers[rt];
+} 
 
-void srl(uint32_t instruction){} 
+void srl(uint32_t instruction){
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	uint8_t shamt = SHAMT_FIELD(instruction);
+	registers[rd] = logicalShiftRight((uint32_t) registers[rt], shamt);
+} 
 
 void sra(uint32_t instruction){} 
 
