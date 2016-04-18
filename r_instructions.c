@@ -201,16 +201,16 @@ void jr(uint32_t instruction){
 
 void jalr(uint32_t instruction){
 	uint8_t rs = RT_FIELD(instruction);
-	registers[31] = pc << 2;
+	registers[31] = (uint32_t) (pc << 2);
 	npc = registers[rs];
 } 
 
 void mfhi(uint32_t instruction){
 	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = HI;
+	registers[rd] = (uint32_t) HI;
 } 
 
 void mflo(uint32_t instruction){
 	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = LO;
+	registers[rd] = (uint32_t) LO;
 } 
