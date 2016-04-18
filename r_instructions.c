@@ -89,81 +89,128 @@ void multu(uint32_t instruction){
 void div(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
-	LO = (int32_t) registers[rs] / (int32_t) registers[rt];
-	HI = (int32_t) registers[rs] % (int32_t) registers[rt];
+	LO = (uint32_t) ((int32_t) registers[rs] / (int32_t) registers[rt]);
+	HI = (uint32_t) ((int32_t) registers[rs] % (int32_t) registers[rt]);
 } 
 
 void divu(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
-	LO = (uint32_t) registers[rs] / (uint32_t) registers[rt];
-	HI = (uint32_t) registers[rs] % (uint32_t) registers[rt];
+	LO = (uint32_t) ((uint32_t) registers[rs] / (uint32_t) registers[rt]);
+	HI = (uint32_t) ((uint32_t) registers[rs] % (uint32_t) registers[rt]);
 } 
 
 void and(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) registers[rs] & (uint32_t) registers[rt];
+	registers[rd] = (uint32_t) ((uint32_t) registers[rs] & (uint32_t) registers[rt]);
 } 
 
 void nor(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = ~((uint32_t) registers[rs] | (uint32_t) registers[rt]);
+	registers[rd] = (uint32_t) ~((uint32_t) registers[rs] | (uint32_t) registers[rt]);
 } 
 
 void or(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) registers[rs] | (uint32_t) registers[rt];
+	registers[rd] = (uint32_t) ((uint32_t) registers[rs] | (uint32_t) registers[rt]);
 } 
 
 void xor(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) registers[rs] ^ (uint32_t) registers[rt];
+	registers[rd] = (uint32_t) ((uint32_t) registers[rs] ^ (uint32_t) registers[rt]);
 } 
 
 void sll(uint32_t instruction){
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
 	uint8_t shamt = SHAMT_FIELD(instruction);
-	registers[rd] = (uint32_t) registers[rt] << shamt;
+	registers[rd] = (uint32_t) ((uint32_t) registers[rt] << shamt);
 } 
 
 void sllv(uint32_t instruction){
 	uint8_t rs = RT_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
-	uint8_t shamt = SHAMT_FIELD(instruction);
-	registers[rd] = (uint32_t) registers[rs] << (uint32_t) registers[rt];
+	registers[rd] = (uint32_t) ((uint32_t) registers[rs] << (uint32_t) registers[rt]);
 } 
 
 void srl(uint32_t instruction){
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
 	uint8_t shamt = SHAMT_FIELD(instruction);
-	registers[rd] = logicalShiftRight((uint32_t) registers[rt], shamt);
+	registers[rd] = (uint32_t) logicalShiftRight((uint32_t) registers[rt], shamt);
 } 
 
-void sra(uint32_t instruction){} 
+void sra(uint32_t instruction){
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	uint8_t shamt = SHAMT_FIELD(instruction);
+	registers[rd] = (uint32_t) ((int32_t) registers[rt] >> shamt);
+} 
 
-void srlv(uint32_t instruction){} 
+void srlv(uint32_t instruction){
+	uint8_t rs = RT_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = (uint32_t) logicalShiftRight((uint32_t) registers[rs], registers[rt]);
+} 
 
-void srav(uint32_t instruction){} 
+void srav(uint32_t instruction){
+	uint8_t rs = RT_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = (uint32_t) ((int32_t) registers[rs] >> (uint32_t) registers[rt]);
+} 
 
-void slt(uint32_t instruction){} 
+void slt(uint32_t instruction){
+	uint8_t rs = RT_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	if((int32_t) registers[rs] < (int32_t) registers[rt]){
+		registers[rd] = 1;
+	}
+	else {
+		registers[rd] = 0;
+	}
+} 
 
-void sltu(uint32_t instruction){} 
+void sltu(uint32_t instruction){
+	uint8_t rs = RT_FIELD(instruction);
+	uint8_t rt = RT_FIELD(instruction);
+	uint8_t rd = RD_FIELD(instruction);
+	if((uint32_t) registers[rs] < (uint32_t) registers[rt]){
+		registers[rd] = 1;
+	}
+	else {
+		registers[rd] = 0;
+	}
+} 
 
-void jr(uint32_t instruction){} 
+void jr(uint32_t instruction){
+	uint8_t rs = RT_FIELD(instruction);
+	npc = (uint32_t) registers[rs];
+} 
 
-void jalr(uint32_t instruction){} 
+void jalr(uint32_t instruction){
+	uint8_t rs = RT_FIELD(instruction);
+	r[31] = pc << 2;
+	npc = registers[rs];
+} 
 
-void mfhi(uint32_t instruction){} 
+void mfhi(uint32_t instruction){
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = HI;
+} 
 
-void mflo(uint32_t instruction){} 
+void mflo(uint32_t instruction){
+	uint8_t rd = RD_FIELD(instruction);
+	registers[rd] = LO;
+} 
