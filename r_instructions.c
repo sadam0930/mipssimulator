@@ -175,10 +175,10 @@ void slt(uint32_t instruction){
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
 	if((int32_t) registers[rs] < (int32_t) registers[rt]){
-		registers[rd] = 1;
+		registers[rd] = (uint32_t) 0x00000001;
 	}
 	else {
-		registers[rd] = 0;
+		registers[rd] = (uint32_t) 0x00000000;
 	}
 } 
 
@@ -187,10 +187,10 @@ void sltu(uint32_t instruction){
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
 	if((uint32_t) registers[rs] < (uint32_t) registers[rt]){
-		registers[rd] = 1;
+		registers[rd] = (uint32_t) 0x00000001;
 	}
 	else {
-		registers[rd] = 0;
+		registers[rd] = (uint32_t) 0x00000000;
 	}
 } 
 
