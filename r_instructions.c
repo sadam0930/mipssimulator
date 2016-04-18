@@ -161,11 +161,7 @@ void jalr(uint32_t instruction){
 } 
 
 void mfhi(uint32_t instruction){
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) HI;
 } 
 
 void mflo(uint32_t instruction){
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) LO;
 } 
