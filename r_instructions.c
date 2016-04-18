@@ -1,5 +1,6 @@
 #include <stdint.h> 
 #include "cpu.h"
+#include "utilities.h"
 
 //These are the R-instructions implemented by the simulted MIPS processor
 //You will need to define the following macros that use masking and
@@ -129,80 +130,34 @@ void xor(uint32_t instruction){
 } 
 
 void sll(uint32_t instruction){
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	uint8_t shamt = SHAMT_FIELD(instruction);
-	registers[rd] = (uint32_t) ((uint32_t) registers[rt] << shamt);
+
 } 
 
 void sllv(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) ((uint32_t) registers[rs] << (uint32_t) registers[rt]);
 } 
 
 void srl(uint32_t instruction){
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	uint8_t shamt = SHAMT_FIELD(instruction);
-	registers[rd] = (uint32_t) logicalShiftRight((uint32_t) registers[rt], shamt);
 } 
 
 void sra(uint32_t instruction){
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	uint8_t shamt = SHAMT_FIELD(instruction);
-	registers[rd] = (uint32_t) ((int32_t) registers[rt] >> shamt);
 } 
 
 void srlv(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) logicalShiftRight((uint32_t) registers[rs], registers[rt]);
 } 
 
 void srav(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) ((int32_t) registers[rs] >> (uint32_t) registers[rt]);
 } 
 
 void slt(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	if((int32_t) registers[rs] < (int32_t) registers[rt]){
-		registers[rd] = (uint32_t) 0x00000001;
-	}
-	else {
-		registers[rd] = (uint32_t) 0x00000000;
-	}
 } 
 
 void sltu(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	if((uint32_t) registers[rs] < (uint32_t) registers[rt]){
-		registers[rd] = (uint32_t) 0x00000001;
-	}
-	else {
-		registers[rd] = (uint32_t) 0x00000000;
-	}
 } 
 
 void jr(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
-	npc = (uint32_t) registers[rs];
 } 
 
 void jalr(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
-	registers[31] = (uint32_t) (pc << 2);
-	npc = registers[rs];
 } 
 
 void mfhi(uint32_t instruction){
