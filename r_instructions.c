@@ -72,61 +72,27 @@ void subu(uint32_t instruction){
 } 
 
 void mult(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	int64_t result = (int64_t)((int32_t) registers[rs]) * (int64_t)((int32_t) registers[rt]);
-	LO = (uint32_t) result;
-	HI = (uint32_t) logicalShiftRight(result, 32);
 } 
 
 void multu(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint64_t result = (uint64_t) registers[rs] * (uint64_t) registers[rt]; 
-	LO = (uint32_t) result;
-	HI = (uint32_t) logicalShiftRight(result, 32);
 } 
 
 void div(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	LO = (uint32_t) ((int32_t) registers[rs] / (int32_t) registers[rt]);
-	HI = (uint32_t) ((int32_t) registers[rs] % (int32_t) registers[rt]);
 } 
 
 void divu(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	LO = (uint32_t) ((uint32_t) registers[rs] / (uint32_t) registers[rt]);
-	HI = (uint32_t) ((uint32_t) registers[rs] % (uint32_t) registers[rt]);
 } 
 
 void and(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) ((uint32_t) registers[rs] & (uint32_t) registers[rt]);
 } 
 
 void nor(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) ~((uint32_t) registers[rs] | (uint32_t) registers[rt]);
 } 
 
 void or(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) ((uint32_t) registers[rs] | (uint32_t) registers[rt]);
 } 
 
 void xor(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) ((uint32_t) registers[rs] ^ (uint32_t) registers[rt]);
 } 
 
 void sll(uint32_t instruction){
