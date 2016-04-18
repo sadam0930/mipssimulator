@@ -35,6 +35,7 @@ uint8_t RD_FIELD(uint32_t instruction){
 	return (uint8_t) instruction;
 }
 
+//extracts the value of the shamt field bits 
 uint8_t SHAMT_FIELD(uint32_t instruction){
 	instruction = instruction << 21;
 	instruction = logicalShiftRight(instruction, 27);
@@ -51,24 +52,12 @@ void add(uint32_t instruction){
 }
 
 void addu(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) ((uint32_t) registers[rs] + (uint32_t) registers[rt]);
 } 
 
 void sub(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) ((int32_t) registers[rs] - (int32_t) registers[rt]);
 } 
 
 void subu(uint32_t instruction){
-	uint8_t rs = RS_FIELD(instruction);
-	uint8_t rt = RT_FIELD(instruction);
-	uint8_t rd = RD_FIELD(instruction);
-	registers[rd] = (uint32_t) ((uint32_t) registers[rs] - (uint32_t) registers[rt]);
 } 
 
 void mult(uint32_t instruction){
