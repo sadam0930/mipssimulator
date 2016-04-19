@@ -203,7 +203,7 @@ void jr(uint32_t instruction){
 
 void jalr(uint32_t instruction){
 	uint8_t rs = RT_FIELD(instruction);
-	registers[31] = (uint32_t) (pc << 2);
+	registers[31] = (uint32_t) (pc + (uint32_t) 0x00000004);
 	npc = (uint32_t) registers[rs];
 } 
 
