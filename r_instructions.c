@@ -49,7 +49,7 @@ void add(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
-	printf("In add function\n");
+	//printf("In add function\n");
 	registers[rd] = (uint32_t) ((int32_t) registers[rs] + (int32_t) registers[rt]);
 }
 
@@ -57,7 +57,7 @@ void addu(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
-	printf("In addu function\n");
+	//printf("In addu function\n");
 	registers[rd] = (uint32_t) ((uint32_t) registers[rs] + (uint32_t) registers[rt]);
 } 
 
@@ -78,7 +78,7 @@ void subu(uint32_t instruction){
 void mult(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
-	printf("In mult function\n");
+	//printf("In mult function\n");
 	int64_t result = (int64_t)((int32_t) registers[rs]) * (int64_t)((int32_t) registers[rt]);
 	LO = (uint32_t) result;
 	HI = (uint32_t) logicalShiftRight(result, 32);
@@ -163,21 +163,21 @@ void sra(uint32_t instruction){
 } 
 
 void srlv(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
+	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
 	registers[rd] = (uint32_t) logicalShiftRight((uint32_t) registers[rs], registers[rt]);
 } 
 
 void srav(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
+	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
 	registers[rd] = (uint32_t) ((int32_t) registers[rs] >> (uint32_t) registers[rt]);
 } 
 
 void slt(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
+	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
 	if((int32_t) registers[rs] < (int32_t) registers[rt]){
@@ -189,7 +189,7 @@ void slt(uint32_t instruction){
 } 
 
 void sltu(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
+	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
 	if((uint32_t) registers[rs] < (uint32_t) registers[rt]){
@@ -201,15 +201,15 @@ void sltu(uint32_t instruction){
 } 
 
 void jr(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
-	printf("In jr procedure\n");
+	uint8_t rs = RS_FIELD(instruction);
+	//printf("In jr procedure\n");
 	npc = (uint32_t) registers[rs];
 } 
 
 void jalr(uint32_t instruction){
-	uint8_t rs = RT_FIELD(instruction);
+	uint8_t rs = RS_FIELD(instruction);
 	registers[31] = (uint32_t) (pc + (uint32_t) 0x00000004);
-	printf("In jalr procedure\n");
+	//printf("In jalr procedure\n");
 	npc = (uint32_t) registers[rs];
 } 
 
