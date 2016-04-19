@@ -57,7 +57,7 @@ void addu(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
 	uint8_t rd = RD_FIELD(instruction);
-	rintf("In addu function\n");
+	printf("In addu function\n");
 	registers[rd] = (uint32_t) ((uint32_t) registers[rs] + (uint32_t) registers[rt]);
 } 
 
@@ -78,7 +78,7 @@ void subu(uint32_t instruction){
 void mult(uint32_t instruction){
 	uint8_t rs = RS_FIELD(instruction);
 	uint8_t rt = RT_FIELD(instruction);
-	rintf("In mult function\n");
+	printf("In mult function\n");
 	int64_t result = (int64_t)((int32_t) registers[rs]) * (int64_t)((int32_t) registers[rt]);
 	LO = (uint32_t) result;
 	HI = (uint32_t) logicalShiftRight(result, 32);
