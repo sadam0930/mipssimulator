@@ -82,7 +82,7 @@ void mult(uint32_t instruction){
 	int64_t result = (int64_t)((int32_t) registers[rs]) * (int64_t)((int32_t) registers[rt]);
 	LO = (uint32_t) result;
 	//HI = (uint32_t) logicalShiftRight(result, 32);
-	HI = (uint32_t) result >> 32;
+	HI = (uint32_t) (result >> 32);
 } 
 
 void multu(uint32_t instruction){
