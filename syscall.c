@@ -5,7 +5,6 @@
 
 void syscall(){
 	switch(REG_V0){
-		printf("REG_V0 is %d\n", REG_V0);
 		case 0x00000001:
 			//print_int
 			printf("%lu\n", (unsigned long) REG_A0);
