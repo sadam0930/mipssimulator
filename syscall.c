@@ -37,7 +37,7 @@ void syscall(){
 			printf("Error: read_double not supported\n");
 			cpu_exit(1);
 			break;
-		case 0x00000008:
+		case 0x00000008: ;
 			//read_string
 			uint32_t max_num_bytes = REG_A1;
 			uint32_t mem_location = REG_A0;
