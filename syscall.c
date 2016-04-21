@@ -7,7 +7,7 @@ void syscall(){
 	switch(REG_V0){
 		case 0x00000001:
 			//print_int
-			printf("%lu\n", (unsigned long) REG_A0);
+			printf("%d\n", REG_A0);
 			break;
 		case 0x00000002:
 			//print_float
