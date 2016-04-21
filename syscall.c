@@ -48,25 +48,25 @@ void syscall(){
 			break;
 		case 0x00000008:
 		printf("in 8\n"); 
-			// {
-			// 	//read_string
-			// 	uint32_t max_num_bytes = REG_A1;
-			// 	uint32_t mem_location = REG_A0;
-			// 	uint32_t byte_i = 0;
+			{
+				//read_string
+				uint32_t max_num_bytes = REG_A1;
+				uint32_t mem_location = REG_A0;
+				uint32_t byte_i = 0;
 
-			// 	char temp[max_num_bytes];
-			// 	scanf("%s", temp);
+				char temp[max_num_bytes];
+				scanf("%s", temp);
 
-			// 	while(byte_i <= max_num_bytes){ 
-			// 		memory[mem_location] = (uint8_t) temp[byte_i];
-			// 		if(temp[byte_i] == 0) {
-			// 			break;
-			// 		} else {
-			// 			byte_i += sizeof(char);
-			// 			mem_location += sizeof(char);
-			// 		}
-			// 	}
-			// }
+				while(byte_i <= max_num_bytes){ 
+					memory[mem_location] = (uint8_t) temp[byte_i];
+					if(temp[byte_i] == 0) {
+						break;
+					} else {
+						byte_i += sizeof(char);
+						mem_location += sizeof(char);
+					}
+				}
+			}
 			break;
 		case 0x00000009:
 		printf("in 9\n");
