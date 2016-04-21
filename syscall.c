@@ -27,7 +27,7 @@ void syscall(){
 		case 0x00000004:
 		printf("in 4\n");
 			//print_string
-			printf("%s\n", memory[REG_A0]);
+			printf("%s\n", &memory[REG_A0]);
 			break;
 		case 0x00000005:
 		printf("in 5\n");
