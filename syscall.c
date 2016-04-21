@@ -21,7 +21,7 @@ void syscall(){
 			break;
 		case 0x00000004:
 			//print_string
-			printf("%s", &memory[REG_A0]);
+			printf("%s\n", &memory[REG_A0]);
 			break;
 		case 0x00000005:
 			//read_int
