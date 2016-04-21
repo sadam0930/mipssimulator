@@ -47,7 +47,7 @@ void syscall(){
 				char temp[max_num_bytes];
 				scanf("%s", temp);
 
-				while(byte_i <= max_num_bytes){ 
+				while(byte_i <= max_num_bytes || temp[byte_i] != 0){ 
 					memory[mem_location] = (uint8_t) temp[byte_i];
 					if(temp[byte_i] == 0) {
 						break;
