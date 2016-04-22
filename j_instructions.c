@@ -4,6 +4,14 @@
 //These are the J-instructions implemented by the simulted MIPS processor
 
 //J instruction:  opcode (6 bits)      address (26 bits)
+uint32_t logicalShiftRight(uint32_t instruction, int shiftamt){
+	instruction = instruction >> 1;
+	uint32_t mask = 0x7fffffff;
+	instruction &= mask;
+	instruction = instruction >> shiftamt-1;
+	return instruction;
+}
+
 uint8_t ADDR_FIELD(uint32_t instruction){ 
 	instruction = instruction << 6;
 	instruction = logicalShiftRight(instruction, 6);
