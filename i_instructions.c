@@ -3,7 +3,7 @@
 
 //These are the i-instructions implemented by the simulted MIPS processor
 
-uint32_t logicalShiftRight(uint32_t instruction, int shiftamt){
+uint32_t logicalShiftRight_i(uint32_t instruction, int shiftamt){
 	instruction = instruction >> 1;
 	uint32_t mask = 0x7fffffff;
 	instruction &= mask;
@@ -14,21 +14,21 @@ uint32_t logicalShiftRight(uint32_t instruction, int shiftamt){
 //extracts the value of the RS field bits (bits 21-25)
 uint8_t RS_FIELD(uint32_t instruction){ 
 	instruction = instruction << 6;
-	instruction = logicalShiftRight(instruction, 27);
+	instruction = logicalShiftRight_i(instruction, 27);
 	return (uint8_t) instruction;
 }
 
 //extracts the value of the RT field bits (bits 16-20)
 uint8_t RT_FIELD(uint32_t instruction){
 	instruction = instruction << 11;
-	instruction = logicalShiftRight(instruction, 27);
+	instruction = logicalShiftRight_i(instruction, 27);
 	return (uint8_t) instruction;
 }
 
 //extracts the value of the immediate field bits
 uint16_t IMM_FIELD(uint32_t instruction){
 	instruction = instruction << 16;
-	instruction = logicalShiftRight(instruction, 16);
+	instruction = logicalShiftRight_i(instruction, 16);
 	return (uint16_t) instruction;
 }
 
