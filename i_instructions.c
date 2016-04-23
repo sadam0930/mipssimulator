@@ -178,7 +178,7 @@ void sh(uint32_t instruction){
 	uint32_t rs = RS_FIELD(instruction);
 	uint32_t rt = RT_FIELD(instruction);
 	uint16_t imm = IMM_FIELD(instruction);
-	uint16_t * mlocation = (uint16_t *) memory[(registers[rs] + (uint32_t) sign_extend(imm))];
+	uint16_t * mlocation = (uint16_t *) &memory[(registers[rs] + (uint32_t) sign_extend(imm))];
 	*mlocation = (uint16_t) registers[rt];
 }
 
@@ -186,6 +186,6 @@ void sw(uint32_t instruction){
 	uint32_t rs = RS_FIELD(instruction);
 	uint32_t rt = RT_FIELD(instruction);
 	uint16_t imm = IMM_FIELD(instruction);
-	uint32_t * mlocation = (uint32_t *) memory[(registers[rs] + (uint32_t) sign_extend(imm))];
-	*mlocation = (uint32_t) registers[rt]
+	uint32_t * mlocation = (uint32_t *) &memory[(registers[rs] + (uint32_t) sign_extend(imm))];
+	*mlocation = (uint32_t) registers[rt];
 }
